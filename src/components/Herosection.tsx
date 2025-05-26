@@ -55,7 +55,7 @@ export function HeroSection() {
           </Button>
           <Button
             size="lg"
-            className="group bg-gradient-to-r from-primary to-primary/80 hover:from-blue-500 hover:to-primary text-primary-foreground relative overflow-hidden px-8 py-6 text-base font-medium transition-all duration-300 hover:shadow-lg hover:shadow-primary/50"
+            className="group bg-white  hover:from-blue-500 hover:to-primary text-primary relative overflow-hidden px-8 py-6 text-base font-medium transition-all duration-300 hover:shadow-lg hover:shadow-primary/50 border border-primary"
             onClick={handleExploreNowClick}
           >
             <span className="relative z-10 flex items-center gap-2">

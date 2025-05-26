@@ -75,7 +75,7 @@ export function ReadyToStartSection() {
   ];
 
   return (
-    <section className="relative bg-gradient-to-b from-background via-slate-900/80 to-background py-24 px-6 min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative bg-gradient-to-b from-background  to-background py-24 px-6 min-h-screen flex items-center justify-center overflow-hidden">
       {/* Subtle Grid Background */}
       <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
       
@@ -125,7 +125,7 @@ export function ReadyToStartSection() {
         </div>
 
         {/* Professional Description */}
-        <p className="text-lg text-slate-200 max-w-2xl mx-auto leading-relaxed">
+        <p className="text-lg text-BLACK max-w-2xl mx-auto leading-relaxed">
           Join a global community of learners and achieve your educational goals with our 
           <span className="relative inline-block mx-2 group cursor-pointer">
             <span className="text-white font-medium">personalized learning</span>
@@ -155,7 +155,7 @@ export function ReadyToStartSection() {
           
           <Button
             size="lg"
-            className="group bg-gradient-to-r from-primary to-primary/80 hover:from-blue-500 hover:to-primary text-primary-foreground relative overflow-hidden px-8 py-6 text-base font-medium transition-all duration-300 hover:shadow-lg hover:shadow-primary/50"
+            className="group bg-white hover:from-blue-500 hover:to-primary text-primary relative overflow-hidden px-8 py-6 text-base font-medium transition-all duration-300 hover:shadow-lg hover:shadow-primary/50 border border-primary"
             onClick={handleExploreNowClick}
           >
             <span className="relative z-10 flex items-center gap-2">
