@@ -3,6 +3,7 @@
 
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
+import ThemeSwitcher from '@/components/ThemeSwitcher';
 
 export default function ClientTopNavbar() {
   const router = useRouter();

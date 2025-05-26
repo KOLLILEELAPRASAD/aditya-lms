@@ -2,6 +2,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
+import ThemeSwitcher from './ThemeSwitcher';
 
 interface TopNavbarProps {
   onSignInClick: () => void;
@@ -37,6 +38,7 @@ export function TopNavbar({ onSignInClick, isLoggedIn }: TopNavbarProps) {
           Futuristic LMS
         </h1>
       </div>
+      <ThemeSwitcher/>
       <div className="flex gap-3 z-10">
         <Button
           variant="outline"

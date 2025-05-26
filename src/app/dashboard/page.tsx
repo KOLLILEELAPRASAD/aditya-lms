@@ -162,7 +162,6 @@ export default function DashboardPage() {
   const [currentTime, setCurrentTime] = useState<Date>(new Date());
   const [progressValue, setProgressValue] = useState<number>(0);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
-  const [isDarkTheme, setIsDarkTheme] = useState(false);
   const [scheduleView, setScheduleView] = useState<'list' | 'calendar'>('list');
   const [isLoading, setIsLoading] = useState(true);
   const [isTasksExpanded, setIsTasksExpanded] = useState(false);
@@ -731,8 +730,6 @@ export default function DashboardPage() {
                 </div>
               </HoverTooltip>
 
-              <HoverTooltip text={isDarkTheme ? 'Switch to Light Theme' : 'Switch to Dark Theme'} children={undefined}>
-              </HoverTooltip>
 
               <HoverTooltip text="">
                 <div

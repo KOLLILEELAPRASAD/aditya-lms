@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { BookOpen, Award, BarChart } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { HeroButtons } from './HeroButtons';
 
 interface Stat {
   label: string;
@@ -75,7 +76,7 @@ export function ReadyToStartSection() {
   ];
 
   return (
-    <section className="relative bg-gradient-to-b from-background  to-background py-24 px-6 min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative bg-gradient-to-b from-background  to-background py-24 px-6  flex items-center justify-center overflow-hidden">
       {/* Subtle Grid Background */}
       <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
       
@@ -139,19 +140,11 @@ export function ReadyToStartSection() {
 
         {/* Call-to-Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-5 justify-center">
-         <Button
-            size="lg"
-            className="group bg-gradient-to-r from-primary to-primary/80 hover:from-blue-500 hover:to-primary text-primary-foreground relative overflow-hidden px-8 py-6 text-base font-medium transition-all duration-300 hover:shadow-lg hover:shadow-primary/50"
-                        onClick={handleStartNowClick}
-
-          >
-            <span className="relative z-10 flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-white animate-ping absolute -left-4"></span>
-                Explore Courses
-              <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-            </span>
-            <span className="absolute inset-0 bg-gradient-to-r from-blue-500 to-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-          </Button>
+        <HeroButtons
+                    label="Explore Courses"
+                    action="start"
+                    className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground hover:from-blue-500 hover:to-primary hover:shadow-primary/50"
+                  />
           
           <Button
             size="lg"
