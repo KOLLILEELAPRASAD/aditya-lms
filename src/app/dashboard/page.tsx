@@ -789,7 +789,7 @@ export default function DashboardPage() {
             <div className="lg:col-span-2 space-y-6">
               {/* Progress Overview */}
               <Card
-                className="relative overflow-hidden bg-white/90 backdrop-blur-lg border-gray-300/50 shadow-md shadow-gray-300/20 hover:scale-105 hover:ring-2 hover:ring-violet-300 transition-all duration-300 animate-fadeInUp text-gray-800"
+                className="relative overflow-hidden bg-white/90 backdrop-blur-lg border-gray-300/50 shadow-md shadow-gray-300/20  hover:ring-2 hover:ring-violet-300 transition-all duration-300 animate-fadeInUp text-gray-800"
                 onClick={handleCardClick}
                 style={{ animationDelay: '0ms' }}
               >
@@ -889,7 +889,7 @@ export default function DashboardPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Upcoming Tasks */}
                 <Card
-                  className="relative overflow-hidden bg-white/90 backdrop-blur-lg border-gray-300/50 shadow-md shadow-gray-300/20 hover:scale-105 hover:ring-2 hover:ring-violet-300 transition-all duration-300 animate-fadeInUp text-gray-800"
+                  className="relative overflow-hidden bg-white/90 backdrop-blur-lg border-gray-300/50 shadow-md shadow-gray-300/20  hover:ring-2 hover:ring-violet-300 transition-all duration-300 animate-fadeInUp text-gray-800"
                   onClick={handleCardClick}
                   style={{ animationDelay: '100ms' }}
                 >
@@ -913,23 +913,10 @@ export default function DashboardPage() {
                       <ClipboardList className="h-5 w-5 mr-2 text-violet-600" />
                       Upcoming Tasks
                     </CardTitle>
-                    <HoverTooltip text={isTasksExpanded ? 'Collapse Tasks' : 'Expand Tasks'}>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="text-gray-600 hover:text-gray-800"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setIsTasksExpanded(!isTasksExpanded);
-                          setSelectedTaskCategory(null);
-                        }}
-                      >
-                        {isTasksExpanded ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />}
-                      </Button>
-                    </HoverTooltip>
+                   
                   </CardHeader>
                   <CardContent>
-                    {isTasksExpanded ? (
+                    
                       <div className="space-y-4 transition-all duration-300">
                         {/* Categories */}
                         {!selectedTaskCategory ? (
@@ -1041,17 +1028,16 @@ export default function DashboardPage() {
                           </div>
                         )}
                       </div>
-                    ) : (
-                      <p className="text-gray-600 text-sm">Click to view your upcoming tasks.</p>
-                    )}
+                    
+                      <p className="text-gray-600 text-sm"></p>
+                    
                   </CardContent>
                 </Card>
 
                 {/* Weekly Schedule */}
                 <Card
-                  className="relative overflow-hidden bg-white/90 backdrop-blur-lg border-gray-300/50 shadow-md shadow-gray-300/20 hover:scale-105 hover:ring-2 hover:ring-violet-300 transition-all duration-300 animate-fadeInUp text-gray-800"
+                  className="relative overflow-hidden bg-white/90 backdrop-blur-lg border-gray-300/50 shadow-md shadow-gray-300/20  hover:ring-2 hover:ring-violet-300 transition-all duration-300 animate-fadeInUp text-gray-800"
                   onClick={handleCardClick}
-                  style={{ animationDelay: '200ms' }}
                 >
                   {[...Array(5)].map((_, i) => (
                     <div
@@ -1178,7 +1164,7 @@ export default function DashboardPage() {
 
               {/* Overall Progress */}
               <Card
-                className="relative overflow-hidden bg-white/90 backdrop-blur-lg border-gray-300/50 shadow-md shadow-gray-300/20 hover:scale-105 hover:ring-2 hover:ring-violet-300 transition-all duration-300 animate-fadeInUp text-gray-800"
+                className="relative overflow-hidden bg-white/90 backdrop-blur-lg border-gray-300/50 shadow-md shadow-gray-300/20  hover:ring-2 hover:ring-violet-300 transition-all duration-300 animate-fadeInUp text-gray-800"
                 onClick={handleCardClick}
                 style={{ animationDelay: '300ms' }}
               >
@@ -1252,7 +1238,7 @@ export default function DashboardPage() {
             <div className="space-y-6">
               {/* Task Completion */}
               <Card
-                className="relative overflow-hidden bg-white/90 backdrop-blur-lg border-gray-300/50 shadow-md shadow-gray-300/20 hover:scale-105 hover:ring-2 hover:ring-violet-300 transition-all duration-300 animate-fadeInUp text-gray-800"
+                className="relative overflow-hidden bg-white/90 backdrop-blur-lg border-gray-300/50 shadow-md shadow-gray-300/20  hover:ring-2 hover:ring-violet-300 transition-all duration-300 animate-fadeInUp text-gray-800"
                 onClick={handleCardClick}
                 style={{ animationDelay: '400ms' }}
               >
@@ -1330,10 +1316,10 @@ export default function DashboardPage() {
                     ))}
                   </div>
 
-                  <div className="mt-4 p-3 rounded-lg bg-gradient-to-br from-gray-100/70 to-gray-200/70 backdrop-blur-sm border border-gray-300/50">
+                  <div className="mt-4 p-3 rounded-lg bg-gradient-to-br from-gray-100/70 to-gray-200/70  hover:scale-105 transition-all duration-300 animate-fadeInUp backdrop-blur-sm border border-gray-300/50">
                     <div className="flex items-center">
                       <div className="relative h-16 w-16">
-                        <svg className="h-full w-full" viewBox="0 0 36 36">
+                        <svg className="h-full w-full"  viewBox="0 0 36 36">
                           <circle
                             cx="18"
                             cy="18"
@@ -1379,7 +1365,7 @@ export default function DashboardPage() {
 
               {/* My Courses */}
               <Card
-                className="relative overflow-hidden bg-white/90 backdrop-blur-lg border-gray-300/50 shadow-md shadow-gray-300/20 hover:scale-105 hover:ring-2 hover:ring-violet-300 transition-all duration-300 animate-fadeInUp text-gray-800"
+                className="relative overflow-hidden bg-white/90 backdrop-blur-lg border-gray-300/50 shadow-md shadow-gray-300/20  hover:ring-2 hover:ring-violet-300 transition-all duration-300 animate-fadeInUp text-gray-800"
                 onClick={handleCardClick}
                 style={{ animationDelay: '500ms' }}
               >
@@ -1453,7 +1439,7 @@ export default function DashboardPage() {
 
               {/* Notifications */}
               <Card
-                className="relative overflow-hidden bg-white/90 backdrop-blur-lg border-gray-300/50 shadow-md shadow-gray-300/20 hover:scale-105 hover:ring-2 hover:ring-violet-300 transition-all duration-300 animate-fadeInUp text-gray-800"
+                className="relative overflow-hidden bg-white/90 backdrop-blur-lg border-gray-300/50 shadow-md shadow-gray-300/20  hover:ring-2 hover:ring-violet-300 transition-all duration-300 animate-fadeInUp text-gray-800"
                 onClick={handleCardClick}
                 style={{ animationDelay: '600ms' }}
               >

@@ -26,6 +26,7 @@ import {
   Trophy,
   Sparkles,
   CheckCircle,
+  Download,
 } from 'lucide-react';
 
 // Profile Modal Component
@@ -88,6 +89,12 @@ export default function Course1Page() {
   const [isDarkTheme, setIsDarkTheme] = useState(false); // Default to light theme for white background
   const [scheduleView, setScheduleView] = useState<'list' | 'calendar'>('list');
   const [isLoading, setIsLoading] = useState(true);
+  // State for selected certificate
+  const [selectedCertificate, setSelectedCertificate] = useState<any>(null);
+  // States for modals in Profile Overview
+  const [showCompletedCoursesModal, setShowCompletedCoursesModal] = useState(false);
+  const [showPendingCoursesModal, setShowPendingCoursesModal] = useState(false);
+  const [showCertificationsModal, setShowCertificationsModal] = useState(false);
 
   // Sample Data for Course1 Section
   const selectedCourses = [
@@ -106,16 +113,45 @@ export default function Course1Page() {
     { id: 3, title: 'AWS Cloud Practitioner', date: '2025-04-20', icon: '🏆' },
   ];
 
+  // Sample Data for Completed Courses
+  const completedCourses = [
+    { id: 1, title: 'Introduction to JavaScript', duration: '06 weeks', completionDate: '2024-06-10', icon: '📜' },
+    { id: 2, title: 'Web Development Fundamentals', duration: '08 weeks', completionDate: '2024-08-15', icon: '🌐' },
+    { id: 3, title: 'Database Management', duration: '10 weeks', completionDate: '2024-10-20', icon: '🗄️' },
+    { id: 4, title: 'Cybersecurity Basics', duration: '07 weeks', completionDate: '2024-11-05', icon: '🔒' },
+    { id: 5, title: 'Digital Marketing', duration: '05 weeks', completionDate: '2024-12-01', icon: '📈' },
+  ];
+
   // User Profile Stats
   const userStats = {
-    completedCourses: 5,
-    pendingCourses: 3,
+    completedCourses: completedCourses.length,
+    pendingCourses: selectedCourses.length,
     certifications: certificationCourses.length,
     badges: [
       { id: 1, name: 'Python Master', icon: '🐍' },
       { id: 2, name: 'Design Pro', icon: '🎨' },
       { id: 3, name: 'Cloud Expert', icon: '☁️' },
     ],
+  };
+
+  // Map certifications to their respective course subjects
+  const certificationSubjectMap: { [key: string]: string } = {
+    'Certified Python Developer': 'Advanced Python Programming',
+    'UI/UX Design Certification': 'UI/UX Design Principles',
+    'AWS Cloud Practitioner': 'Cloud Computing',
+  };
+
+  // Simulate downloading a certificate in HD
+  const handleDownloadCertificate = (certTitle: string) => {
+    // In a real application, this would generate and download a high-quality PDF
+    // For this example, we'll simulate a download with a mock URL
+    const mockUrl = `https://example.com/certificates/${certTitle.replace(/\s+/g, '-').toLowerCase()}-hd.pdf`;
+    const link = document.createElement('a');
+    link.href = mockUrl;
+    link.download = `${certTitle}-certificate-hd.pdf`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   // Throttled Parallax Effect
@@ -285,6 +321,129 @@ export default function Course1Page() {
 
       {/* Profile Modal */}
       <ProfileModal isOpen={isProfileModalOpen} onClose={() => setIsProfileModalOpen(false)} />
+
+      {/* Completed Courses Modal */}
+      {showCompletedCoursesModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm animate-fadeIn">
+          <div className="bg-white/90 backdrop-blur-lg border border-gray-300/50 rounded-lg p-6 w-full max-w-lg shadow-xl shadow-gray-300/30">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-bold text-gray-800 flex items-center">
+                <CheckCircle className="h-6 w-6 mr-2 text-green-600" />
+                Completed Courses
+              </h2>
+              <Button variant="ghost" size="icon" onClick={() => setShowCompletedCoursesModal(false)} className="text-gray-600 hover:text-gray-800">
+                <X className="h-5 w-5" />
+              </Button>
+            </div>
+            <div className="space-y-4 max-h-[60vh] overflow-y-auto">
+              {completedCourses.map((course) => (
+                <div
+                  key={course.id}
+                  className="p-4 rounded-lg bg-gray-100/50 border border-gray-300/50 hover:bg-gray-200/70 transition-all duration-200 shadow-sm"
+                >
+                  <div className="flex items-center mb-2">
+                    <div className="w-10 h-10 rounded-full bg-green-600/20 flex items-center justify-center text-lg">
+                      {course.icon}
+                    </div>
+                    <div className="ml-3 flex-1">
+                      <h4 className="font-medium text-sm text-gray-800">{course.title}</h4>
+                      <p className="text-xs text-gray-600">Duration: {course.duration}</p>
+                      <p className="text-xs text-gray-600">Completed on: {course.completionDate}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Pending Courses Modal */}
+      {showPendingCoursesModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm animate-fadeIn">
+          <div className="bg-white/90 backdrop-blur-lg border border-gray-300/50 rounded-lg p-6 w-full max-w-lg shadow-xl shadow-gray-300/30">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-bold text-gray-800 flex items-center">
+                <ClipboardList className="h-6 w-6 mr-2 text-amber-600" />
+                Pending Courses
+              </h2>
+              <Button variant="ghost" size="icon" onClick={() => setShowPendingCoursesModal(false)} className="text-gray-600 hover:text-gray-800">
+                <X className="h-5 w-5" />
+              </Button>
+            </div>
+            <div className="space-y-4 max-h-[60vh] overflow-y-auto">
+              {selectedCourses.map((course) => (
+                <div
+                  key={course.id}
+                  className="p-4 rounded-lg bg-gray-100/50 border border-gray-300/50 hover:bg-gray-200/70 transition-all duration-200 shadow-sm"
+                >
+                  <div className="flex items-center mb-2">
+                    <div className="w-10 h-10 rounded-full bg-amber-600/20 flex items-center justify-center text-lg">
+                      {course.icon}
+                    </div>
+                    <div className="ml-3 flex-1">
+                      <h4 className="font-medium text-sm text-gray-800">{course.title}</h4>
+                      <p className="text-xs text-gray-600">Duration: {course.duration}</p>
+                    </div>
+                  </div>
+                  <div className="mt-2">
+                    <div className="flex justify-between items-center mb-1">
+                      <span className="text-xs text-gray-600">Progress</span>
+                      <span className="text-xs font-medium text-gray-800">{course.progress}%</span>
+                    </div>
+                    <Progress value={course.progress} className="h-2 bg-gray-300" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Certifications Modal */}
+      {showCertificationsModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm animate-fadeIn">
+          <div className="bg-white/90 backdrop-blur-lg border border-gray-300/50 rounded-lg p-6 w-full max-w-lg shadow-xl shadow-gray-300/30">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-bold text-gray-800 flex items-center">
+                <Award className="h-6 w-6 mr-2 text-violet-600" />
+                Certifications
+              </h2>
+              <Button variant="ghost" size="icon" onClick={() => setShowCertificationsModal(false)} className="text-gray-600 hover:text-gray-800">
+                <X className="h-5 w-5" />
+              </Button>
+            </div>
+            <div className="space-y-4 max-h-[60vh] overflow-y-auto">
+              {certificationCourses.map((cert) => (
+                <div
+                  key={cert.id}
+                  className="p-4 rounded-lg bg-gray-100/50 border border-gray-300/50 hover:bg-gray-200/70 transition-all duration-200 shadow-sm"
+                >
+                  <div className="flex items-center mb-2">
+                    <div className="w-10 h-10 rounded-full bg-violet-600/20 flex items-center justify-center text-lg">
+                      {cert.icon}
+                    </div>
+                    <div className="ml-3 flex-1">
+                      <h4 className="font-medium text-sm text-gray-800">{cert.title}</h4>
+                      <p className="text-xs text-gray-600">Completed on: {cert.date}</p>
+                      <p className="text-xs text-gray-600">
+                        Course Subject: {certificationSubjectMap[cert.title]}
+                      </p>
+                    </div>
+                  </div>
+                  <Button
+                    onClick={() => handleDownloadCertificate(cert.title)}
+                    className="mt-2 bg-violet-500 hover:bg-violet-600 text-white text-xs flex items-center"
+                  >
+                    <Download className="h-4 w-4 mr-1" />
+                    Download HD
+                  </Button>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Sidebar */}
       <div className="flex">
@@ -472,7 +631,7 @@ export default function Course1Page() {
             <div className="lg:col-span-2 space-y-6">
               {/* Selected Courses */}
               <Card
-                className="relative overflow-hidden bg-white/90 backdrop-blur-lg border-gray-300/50 shadow-md shadow-gray-300/20 hover:scale-105 hover:ring-2 hover:ring-violet-300 transition-all duration-300 animate-fadeInUp text-gray-800"
+                className="relative overflow-hidden bg-white/90 backdrop-blur-lg border-gray-300/50 shadow-md shadow-gray-300/20  hover:ring-2 hover:ring-violet-300 transition-all duration-300 animate-fadeInUp text-gray-800"
                 onClick={handleCardClick}
                 style={{ animationDelay: '0ms' }}
               >
@@ -539,7 +698,7 @@ export default function Course1Page() {
 
               {/* Recommended Courses */}
               <Card
-                className="relative overflow-hidden bg-white/90 backdrop-blur-lg border-gray-300/50 shadow-md shadow-gray-300/20 hover:scale-105 hover:ring-2 hover:ring-violet-300 transition-all duration-300 animate-fadeInUp text-gray-800"
+                className="relative overflow-hidden bg-white/90 backdrop-blur-lg border-gray-300/50 shadow-md shadow-gray-300/20  hover:ring-2 hover:ring-violet-300 transition-all duration-300 animate-fadeInUp text-gray-800"
                 onClick={handleCardClick}
                 style={{ animationDelay: '100ms' }}
               >
@@ -584,11 +743,7 @@ export default function Course1Page() {
                             </p>
                           </div>
                         </div>
-                        <Button
-                          className="w-full bg-gradient-to-r from-violet-500 to-violet-500 hover:from-violet-600 hover:to-fuchsia-600 text-white border-none hover:scale-105 transition-transform duration-200"
-                        >
-                          Enroll Now
-                        </Button>
+                        
                       </div>
                     ))}
                   </div>
@@ -597,7 +752,7 @@ export default function Course1Page() {
 
               {/* Certification Courses */}
               <Card
-                className="relative overflow-hidden bg-white/90 backdrop-blur-lg border-gray-300/50 shadow-md shadow-gray-300/20 hover:scale-105 hover:ring-2 hover:ring-violet-300 transition-all duration-300 animate-fadeInUp text-gray-800"
+                className="relative overflow-hidden bg-white/90 backdrop-blur-lg border-gray-300/50 shadow-md shadow-gray-300/20  hover:ring-2 hover:ring-violet-300 transition-all duration-300 animate-fadeInUp text-gray-800"
                 onClick={handleCardClick}
                 style={{ animationDelay: '200ms' }}
               >
@@ -624,26 +779,80 @@ export default function Course1Page() {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
-                    {certificationCourses.map((cert) => (
-                      <div
-                        key={cert.id}
-                        className="p-3 rounded-lg bg-gray-100/50 border border-gray-300/50 hover:bg-gray-200/70 hover:scale-102 transition-all duration-200"
-                      >
-                        <div className="flex items-center">
-                          <div className="w-8 h-8 rounded-full bg-violet-600/20 flex items-center justify-center text-lg">
-                            {cert.icon}
+                    {selectedCertificate ? (
+                      <div className="animate-fadeIn">
+                        {/* Back Button */}
+                        <button
+                          onClick={() => setSelectedCertificate(null)}
+                          className="mb-4 text-violet-600 hover:text-violet-800 flex items-center text-sm transition-colors duration-200"
+                        >
+                          <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+                          </svg>
+                          Back to Certifications
+                        </button>
+
+                        {/* Certificate Details */}
+                        <div className="p-4 rounded-lg bg-gray-100/50 border border-gray-300/50 shadow-sm">
+                          <div className="flex items-center mb-4">
+                            <div className="w-12 h-12 rounded-full bg-violet-600/20 flex items-center justify-center text-2xl">
+                              🏆
+                            </div>
+                            <div className="ml-4">
+                              <h4 className="font-medium text-lg text-gray-800">
+                                {selectedCertificate.title}
+                              </h4>
+                              <p className="text-sm text-gray-600">
+                                Course Subject: {certificationSubjectMap[selectedCertificate.title]}
+                              </p>
+                            </div>
                           </div>
-                          <div className="ml-3 flex-1">
-                            <h4 className="font-medium text-sm text-gray-800">
-                              {cert.title}
-                            </h4>
-                            <p className="text-xs text-gray-600">
-                              Completed on {cert.date}
+                          <div className="space-y-2">
+                            <p className="text-sm text-gray-600">
+                              <span className="font-medium text-gray-800">Completed on:</span> {selectedCertificate.date}
+                            </p>
+                            <p className="text-sm text-gray-600">
+                              <span className="font-medium text-gray-800">Awarded to:</span> Enaya Ayat
+                            </p>
+                          </div>
+                          {/* Mock Certificate Preview */}
+                          <div className="mt-4 p-4 bg-white border border-gray-300/50 rounded-lg shadow-inner">
+                            <div className="flex justify-center mb-4">
+                              <Award className="h-12 w-12 text-violet-600" />
+                            </div>
+                            <h5 className="text-center text-md font-semibold text-gray-800">
+                              Certificate of Completion
+                            </h5>
+                            <p className="text-center text-sm text-gray-600 mt-2">
+                              This certifies that Enaya Ayat has successfully completed the course
+                              <span className="font-medium"> {certificationSubjectMap[selectedCertificate.title]}</span>.
                             </p>
                           </div>
                         </div>
                       </div>
-                    ))}
+                    ) : (
+                      certificationCourses.map((cert) => (
+                        <div
+                          key={cert.id}
+                          className="p-3 rounded-lg bg-gray-100/50 border border-gray-300/50 hover:bg-gray-200/70 hover:scale-102 transition-all duration-200 cursor-pointer"
+                          onClick={() => setSelectedCertificate(cert)}
+                        >
+                          <div className="flex items-center">
+                            <div className="w-8 h-8 rounded-full bg-violet-600/20 flex items-center justify-center text-lg">
+                              {cert.icon}
+                            </div>
+                            <div className="ml-3 flex-1">
+                              <h4 className="font-medium text-sm text-gray-800">
+                                {cert.title}
+                              </h4>
+                              <p className="text-xs text-gray-600">
+                                Completed on {cert.date}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      ))
+                    )}
                   </div>
                 </CardContent>
               </Card>
@@ -653,7 +862,7 @@ export default function Course1Page() {
             <div className="space-y-6">
               {/* User Profile & Stats */}
               <Card
-                className="relative overflow-hidden bg-white/90 backdrop-blur-lg border-gray-300/50 shadow-md shadow-gray-300/20 hover:scale-105 hover:ring-2 hover:ring-violet-300 transition-all duration-300 animate-fadeInUp text-gray-800"
+                className="relative overflow-hidden bg-white/90 backdrop-blur-lg border-gray-300/50 shadow-md shadow-gray-300/20  hover:ring-2 hover:ring-violet-300 transition-all duration-300 animate-fadeInUp text-gray-800"
                 onClick={handleCardClick}
                 style={{ animationDelay: '300ms' }}
               >
@@ -697,7 +906,10 @@ export default function Course1Page() {
                   {/* Stats Overview */}
                   <div className="space-y-4">
                     {/* Completed Courses */}
-                    <div className="p-3 rounded-lg bg-gray-100/50 border border-gray-300/50 hover:bg-gray-200/70 hover:scale-102 transition-all duration-200">
+                    <div
+                      className="p-3 rounded-lg bg-gray-100/50 border border-gray-300/50 hover:bg-gray-200/70 hover:scale-102 transition-all duration-200 cursor-pointer"
+                      onClick={() => setShowCompletedCoursesModal(true)}
+                    >
                       <div className="flex items-center">
                         <CheckCircle className="h-5 w-5 mr-2 text-green-600" />
                         <div className="flex-1">
@@ -712,7 +924,10 @@ export default function Course1Page() {
                     </div>
 
                     {/* Pending Courses */}
-                    <div className="p-3 rounded-lg bg-gray-100/50 border border-gray-300/50 hover:bg-gray-200/70 hover:scale-102 transition-all duration-200">
+                    <div
+                      className="p-3 rounded-lg bg-gray-100/50 border border-gray-300/50 hover:bg-gray-200/70 hover:scale-102 transition-all duration-200 cursor-pointer"
+                      onClick={() => setShowPendingCoursesModal(true)}
+                    >
                       <div className="flex items-center">
                         <ClipboardList className="h-5 w-5 mr-2 text-amber-600" />
                         <div className="flex-1">
@@ -727,7 +942,10 @@ export default function Course1Page() {
                     </div>
 
                     {/* Certifications */}
-                    <div className="p-3 rounded-lg bg-gray-100/50 border border-gray-300/50 hover:bg-gray-200/70 hover:scale-102 transition-all duration-200">
+                    <div
+                      className="p-3 rounded-lg bg-gray-100/50 border border-gray-300/50 hover:bg-gray-200/70 hover:scale-102 transition-all duration-200 cursor-pointer"
+                      onClick={() => setShowCertificationsModal(true)}
+                    >
                       <div className="flex items-center">
                         <Award className="h-5 w-5 mr-2 text-violet-600" />
                         <div className="flex-1">

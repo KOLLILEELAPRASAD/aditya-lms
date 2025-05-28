@@ -1041,7 +1041,7 @@ export default function ProfilePage() {
             <div className="lg:col-span-2 space-y-6">
               {/* User Info Card */}
               <Card
-                className="relative overflow-hidden bg-white/90 backdrop-blur-lg border-gray-300/50 shadow-md shadow-gray-300/20 hover:scale-105 hover:ring-2 hover:ring-violet-300 transition-all duration-300 animate-fadeInUp text-gray-800"
+                className="relative overflow-hidden bg-white/90 backdrop-blur-lg border-gray-300/50 shadow-md shadow-gray-300/20  hover:ring-2 hover:ring-violet-300 transition-all duration-300 animate-fadeInUp text-gray-800"
                 onClick={handleCardClick}
                 style={{ animationDelay: '0ms' }}
               >
@@ -1117,7 +1117,7 @@ export default function ProfilePage() {
 
               {/* Activity Timeline Card */}
               <Card
-                className="relative overflow-hidden bg-white/90 backdrop-blur-lg border-gray-300/50 shadow-md shadow-gray-300/20 hover:scale-105 hover:ring-2 hover:ring-violet-300 transition-all duration-300 animate-fadeInUp text-gray-800"
+                className="relative overflow-hidden bg-white/90 backdrop-blur-lg border-gray-300/50 shadow-md shadow-gray-300/20  hover:ring-2 hover:ring-violet-300 transition-all duration-300 animate-fadeInUp text-gray-800"
                 onClick={handleCardClick}
                 style={{ animationDelay: '100ms' }}
               >
@@ -1156,7 +1156,7 @@ export default function ProfilePage() {
             <div className="space-y-6">
               {/* Academic Progress Donut Chart */}
               <Card
-                className="relative overflow-hidden bg-white/90 backdrop-blur-lg border-gray-300/50 shadow-md shadow-gray-300/20 hover:scale-105 hover:ring-2 hover:ring-violet-300 transition-all duration-300 animate-fadeInUp text-gray-800"
+                className="relative overflow-hidden bg-white/90 backdrop-blur-lg border-gray-300/50 shadow-md shadow-gray-300/20  hover:ring-2 hover:ring-violet-300 transition-all duration-300 animate-fadeInUp text-gray-800"
                 onClick={handleCardClick}
                 style={{ animationDelay: '200ms' }}
               >
@@ -1191,7 +1191,7 @@ export default function ProfilePage() {
 
               {/* Attendance Line Chart */}
               <Card
-                className="relative overflow-hidden bg-white/90 backdrop-blur-lg border-gray-300/50 shadow-md shadow-gray-300/20 hover:scale-105 hover:ring-2 hover:ring-violet-300 transition-all duration-300 animate-fadeInUp text-gray-800"
+                className="relative overflow-hidden bg-white/90 backdrop-blur-lg border-gray-300/50 shadow-md shadow-gray-300/20 hover:ring-2 hover:ring-violet-300 transition-all duration-300 animate-fadeInUp text-gray-800"
                 onClick={handleCardClick}
                 style={{ animationDelay: '300ms' }}
               >
@@ -1223,7 +1223,7 @@ export default function ProfilePage() {
 
               {/* Achievements Card */}
               <Card
-                className="relative overflow-hidden bg-white/90 backdrop-blur-lg border-gray-300/50 shadow-md shadow-gray-300/20 hover:scale-105 hover:ring-2 hover:ring-violet-300 transition-all duration-300 animate-fadeInUp text-gray-800"
+                className="relative overflow-hidden bg-white/90 backdrop-blur-lg  border-gray-300/50 shadow-md shadow-gray-300/20  hover:ring-2 hover:ring-violet-300 transition-all duration-300 animate-fadeInUp text-gray-800 "
                 onClick={handleCardClick}
                 style={{ animationDelay: '400ms' }}
               >
